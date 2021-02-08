@@ -1,0 +1,26 @@
+body {
+    background-color: rgb(201, 201, 201);
+}
+
+.ShopTable {
+    padding: 3px 7px;
+    background-color: white;
+    border-spacing: 40px 10px;
+    padding: 10px;
+    align-items: center;
+    margin: auto;
+}
+
+.ShopTable .ShopCaption {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.ShopTable .Product .productsImg img {
+    width: 100px;
+}
+
+.Product,
+.ProductsThead {
+    text-align: center;
+}

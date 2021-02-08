@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Магазин</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="ShopTable.js"></script>
+    <link rel="stylesheet" type="text/css" href="ShopTable.css" />
+
+    <script>
+
+        var shopName = 'Евроопт';
+        var productsArr = [
+            { id: 0, name: 'Ананас', price: '4.55', url: 'https://img.e-dostavka.by/UserFiles/images/catalog/Goods/1602/00001602/norm/thumbs/00001602.n_1_190x190@2x.png.jpg', count: 111 },
+            { id: 1, name: 'Банан', price: '3.79', url: 'https://img.e-dostavka.by/UserFiles/images/catalog/Goods/3033/00093033/norm/thumbs/00093033.n_1_190x190@2x.png.jpg', count: 333 },
+            { id: 2, name: 'Помело', price: '3.19', url: 'https://img.e-dostavka.by/UserFiles/images/catalog/Goods/7050/00077050/norm/thumbs/00077050.n_1_190x190@2x.png.jpg?09022021', count: 444 },
+
+        ];
+
+        ReactDOM.render(
+            React.createElement(ShopTable, { shopName: shopName, productsArr: productsArr }),
+            document.getElementById('container')
+        );
+
+    </script>
+
+</body>
+
+</html>
