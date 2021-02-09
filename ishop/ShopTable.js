@@ -1,4 +1,4 @@
-var ShopTable = React.createClass({
+const ShopTable = React.createClass({
 
     displayName: 'ShopTable',
 
@@ -14,7 +14,7 @@ var ShopTable = React.createClass({
         const products = this.props.productsArr.map((e) => {
             return React.DOM.tr({ key: e.id, className: 'Product' },
                 React.DOM.td({ className: 'productsImg' },
-                    React.DOM.img({ src: e.url },)),
+                    React.DOM.img({ src: e.url, alt: "" },)),
                 React.DOM.td({}, e.name),
                 React.DOM.td({}, `${e.price} руб`),
                 React.DOM.td({}, `${e.count} шт`),

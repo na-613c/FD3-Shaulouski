@@ -3,12 +3,11 @@ body {
 }
 
 .ShopTable {
-    padding: 3px 7px;
     background-color: white;
-    border-spacing: 40px 10px;
+    border-spacing: 0 10px;
     padding: 10px;
-    align-items: center;
     margin: auto;
+    border-collapse: collapse
 }
 
 .ShopTable .ShopCaption {
@@ -17,10 +16,28 @@ body {
 }
 
 .ShopTable .Product .productsImg img {
-    width: 100px;
+    height: 100px;
 }
 
 .Product,
 .ProductsThead {
     text-align: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ShopTable td {
+    padding: 0 50px;
+    color: #669;
+}
+
+.ShopTable tr {
+    font-weight: normal;
+    color: #039;
+    border-bottom: 2px solid #6678b1;
+    padding: 10px 8px;
+}
+
+.ShopTable tr:hover td {
+    color: #6699ff;
 }
