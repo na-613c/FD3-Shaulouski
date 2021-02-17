@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
-const Product = ({ product, deleteProduct }) => {
-
-  const [active, setActive] = useState(false);
+const Product = ({ product, deleteProduct, isActive, setActive }) => {
 
   const deleteElement = (e) => {
     e.stopPropagation();
@@ -11,8 +9,12 @@ const Product = ({ product, deleteProduct }) => {
     isDelete && deleteProduct(product.name)
   }
 
+  const setActiveMod = () => {
+    setActive(isActive ? null : product.name)
+  }
+
   return (
-    <tr className={active ? 'Product Active' : 'Product '} onClick={() => setActive(!active)}>
+    <tr className={isActive ? 'Product Active' : 'Product '} onClick={setActiveMod}>
       <td className='productsImg'>
         <img src={product.url} alt="" />
       </td>

@@ -6,6 +6,7 @@ import Product from './Product';
 const Shop = ({ shopName, productsArr }) => {
 
   const [products, setProducts] = useState(productsArr);
+  const [activeName, setActiveName] = useState(null);
 
   const deleteProduct = (name) => {
     setProducts((prev) => prev.filter((el) => el.name !== name))
@@ -16,7 +17,13 @@ const Shop = ({ shopName, productsArr }) => {
   });
 
   const productsElement = products.map((product) => {
-    return (<Product product={product} deleteProduct={deleteProduct} key={product.name} />)
+    return (
+      <Product product={product}
+        deleteProduct={deleteProduct}
+        isActive={(product.name === activeName)}
+        setActive={setActiveName}
+        key={product.name} />
+    )
   });
 
   return (
