@@ -4,9 +4,7 @@ import './index.css';
 import Shop from './components/Shop/Shop.jsx';
 
 const productsArr = require('./data/products.json');
-
 const shopName = 'Евроопт';
-
 
 ReactDOM.render(
   <React.StrictMode>

@@ -20,11 +20,11 @@ class Product extends React.Component {
   deleteElement = (e) => {
     e.stopPropagation();
     const isDelete = window.confirm("Вы действительно хотите удалить?");
-    isDelete && this.props.deleteProduct(this.props.product.name)
+    isDelete && this.props.deleteProduct(this.props.product.id)
   }
 
   setActiveMod = () => {
-    this.props.setActive(this.props.isActive ? null : this.props.product.name)
+    this.props.setActive(this.props.isActive ? null : this.props.product.id)
   }
 
   render() {

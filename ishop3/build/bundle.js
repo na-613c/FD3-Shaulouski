@@ -29240,12 +29240,12 @@ var Shop = function (_React$Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Shop.__proto__ || Object.getPrototypeOf(Shop)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       products: _this.props.productsArr,
-      activeName: null
-    }, _this.setActiveName = function (n) {
-      return _this.setState({ activeName: n });
-    }, _this.deleteProduct = function (name) {
+      activeId: null
+    }, _this.setActiveId = function (id) {
+      return _this.setState({ activeId: id });
+    }, _this.deleteProduct = function (deleteId) {
       var newArrayProducts = _this.state.products.filter(function (el) {
-        return el.name !== name;
+        return el.id !== deleteId;
       });
 
       return _this.setState({
@@ -29268,9 +29268,9 @@ var Shop = function (_React$Component) {
       var productsElement = this.state.products.map(function (product) {
         return _react2.default.createElement(_Product2.default, { product: product,
           deleteProduct: _this2.deleteProduct,
-          isActive: product.name === _this2.state.activeName,
-          setActive: _this2.setActiveName,
-          key: product.name });
+          isActive: product.id === _this2.state.activeId,
+          setActive: _this2.setActiveId,
+          key: product.id });
       });
 
       return _react2.default.createElement(
@@ -29366,9 +29366,9 @@ var Product = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Product.__proto__ || Object.getPrototypeOf(Product)).call.apply(_ref, [this].concat(args))), _this), _this.deleteElement = function (e) {
       e.stopPropagation();
       var isDelete = window.confirm("Вы действительно хотите удалить?");
-      isDelete && _this.props.deleteProduct(_this.props.product.name);
+      isDelete && _this.props.deleteProduct(_this.props.product.id);
     }, _this.setActiveMod = function () {
-      _this.props.setActive(_this.props.isActive ? null : _this.props.product.name);
+      _this.props.setActive(_this.props.isActive ? null : _this.props.product.id);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 

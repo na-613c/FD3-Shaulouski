@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 class Shop extends React.Component {
 
-
   static propTypes = {
     shopName: PropTypes.string,
     productsArr: PropTypes.arrayOf(PropTypes.shape({
@@ -20,28 +19,20 @@ class Shop extends React.Component {
 
   state = {
     products: this.props.productsArr,
-    activeName: null,
+    activeId: null,
   }
 
-  setActiveName = (n) => {
-    return this.setState({ activeName: n })
+  setActiveId = (id) => {
+    return this.setState({ activeId: id })
   }
 
-
-  deleteProduct = (name) => {
-    let newArrayProducts = this.state.products.filter((el) => el.name !== name);
+  deleteProduct = (deleteId) => {
+    let newArrayProducts = this.state.products.filter((el) => el.id !== deleteId);
 
     return this.setState({
       products: newArrayProducts
     })
   };
-
-  theadArr = ["URL фотографии", "Название", "Цена", "Количество", "Управление"].map((e) => {
-    return <td key={e} className='ProductsThead'>{e}</td>
-  });
-
-  
-
 
   render() {
 
@@ -49,10 +40,14 @@ class Shop extends React.Component {
       return (
         <Product product={product}
           deleteProduct={this.deleteProduct}
-          isActive={(product.name === this.state.activeName)}
-          setActive={this.setActiveName}
-          key={product.name} />
+          isActive={(product.id === this.state.activeId)}
+          setActive={this.setActiveId}
+          key={product.id} />
       )
+    });
+
+    const theadArr = ["URL фотографии", "Название", "Цена", "Количество", "Управление"].map((e) => {
+      return <td key={e} className='ProductsThead'>{e}</td>
     });
 
     return (
@@ -60,7 +55,7 @@ class Shop extends React.Component {
         <caption className='ShopCaption'>{this.props.shopName}</caption>
         <thead className='ShopName'>
           <tr>
-            {this.theadArr}
+            {theadArr}
           </tr>
         </thead>
         <tbody>
