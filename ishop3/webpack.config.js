@@ -7,7 +7,7 @@ const extractCSS = new ExtractTextPlugin({
 });
 
 module.exports = { 
-    entry: "./src/index.js", // основной файл приложения
+    entry: "./index.js", // основной файл приложения
     output:{ 
         path: path.resolve(__dirname, 'build'), // путь к каталогу выходных файлов
         filename: "bundle.js"  // название создаваемого файла 

@@ -8,40 +8,29 @@ class Shop extends React.Component {
 
   static propTypes = {
     shopName: PropTypes.string,
-    productsArr: PropTypes.arrayOf(PropTypes.shape({
+    activeId: PropTypes.number,
+    deleteProduct: PropTypes.func,
+    setActiveId: PropTypes.func,
+
+    products: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
       price: PropTypes.number,
       url: PropTypes.string,
       count: PropTypes.number
-    }))
+    })),
   };
 
-  state = {
-    products: this.props.productsArr,
-    activeId: null,
-  }
 
-  setActiveId = (id) => {
-    return this.setState({ activeId: id })
-  }
-
-  deleteProduct = (deleteId) => {
-    let newArrayProducts = this.state.products.filter((el) => el.id !== deleteId);
-
-    return this.setState({
-      products: newArrayProducts
-    })
-  };
 
   render() {
 
-    const productsElement = this.state.products.map((product) => {
+    const productsElement = this.props.products.map((product) => {
       return (
         <Product product={product}
-          deleteProduct={this.deleteProduct}
-          isActive={(product.id === this.state.activeId)}
-          setActive={this.setActiveId}
+          deleteProduct={this.props.deleteProduct}
+          isActive={(product.id === this.props.activeId)}
+          setActive={this.props.setActiveId}
           key={product.id} />
       )
     });
