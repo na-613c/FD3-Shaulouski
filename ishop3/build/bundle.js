@@ -272,6 +272,32 @@ if (process.env.NODE_ENV === 'production') {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactIs = __webpack_require__(7);
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(26)(ReactIs.isElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(27)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /*
 object-assign
@@ -364,32 +390,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = __webpack_require__(7);
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(26)(ReactIs.isElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(27)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 4 */
@@ -573,7 +573,7 @@ var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var productsArr = __webpack_require__(30);
+var productsArr = __webpack_require__(31);
 var shopName = 'Евроопт';
 
 _reactDom2.default.render(_react2.default.createElement(
@@ -596,7 +596,7 @@ _reactDom2.default.render(_react2.default.createElement(
  * LICENSE file in the root directory of this source tree.
  */
 
-var l=__webpack_require__(2),n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.forward_ref"):60112,y=n?Symbol.for("react.suspense"):60113,z=n?Symbol.for("react.memo"):60115,A=n?Symbol.for("react.lazy"):
+var l=__webpack_require__(3),n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.forward_ref"):60112,y=n?Symbol.for("react.suspense"):60113,z=n?Symbol.for("react.memo"):60115,A=n?Symbol.for("react.lazy"):
 60116,B="function"===typeof Symbol&&Symbol.iterator;function C(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}
 var D={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},E={};function F(a,b,c){this.props=a;this.context=b;this.refs=E;this.updater=c||D}F.prototype.isReactComponent={};F.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw Error(C(85));this.updater.enqueueSetState(this,a,b,"setState")};F.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function G(){}G.prototype=F.prototype;function H(a,b,c){this.props=a;this.context=b;this.refs=E;this.updater=c||D}var I=H.prototype=new G;I.constructor=H;l(I,F.prototype);I.isPureReactComponent=!0;var J={current:null},K=Object.prototype.hasOwnProperty,L={key:!0,ref:!0,__self:!0,__source:!0};
@@ -636,7 +636,7 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(2);
+var _assign = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(4);
 
 var ReactVersion = '16.14.0';
@@ -2597,7 +2597,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),n=__webpack_require__(2),r=__webpack_require__(6);function u(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(u(227));
+var aa=__webpack_require__(1),n=__webpack_require__(3),r=__webpack_require__(6);function u(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}if(!aa)throw Error(u(227));
 function ba(a,b,c,d,e,f,g,h,k){var l=Array.prototype.slice.call(arguments,3);try{b.apply(c,l)}catch(m){this.onError(m)}}var da=!1,ea=null,fa=!1,ha=null,ia={onError:function(a){da=!0;ea=a}};function ja(a,b,c,d,e,f,g,h,k){da=!1;ea=null;ba.apply(ia,arguments)}function ka(a,b,c,d,e,f,g,h,k){ja.apply(this,arguments);if(da){if(da){var l=ea;da=!1;ea=null}else throw Error(u(198));fa||(fa=!0,ha=l)}}var la=null,ma=null,na=null;
 function oa(a,b,c){var d=a.type||"unknown-event";a.currentTarget=na(c);ka(d,b,void 0,a);a.currentTarget=null}var pa=null,qa={};
 function ra(){if(pa)for(var a in qa){var b=qa[a],c=pa.indexOf(a);if(!(-1<c))throw Error(u(96,a));if(!sa[c]){if(!b.extractEvents)throw Error(u(97,a));sa[c]=b;c=b.eventTypes;for(var d in c){var e=void 0;var f=c[d],g=b,h=d;if(ta.hasOwnProperty(h))throw Error(u(99,h));ta[h]=f;var k=f.phasedRegistrationNames;if(k){for(e in k)k.hasOwnProperty(e)&&ua(k[e],g,h);e=!0}else f.registrationName?(ua(f.registrationName,g,h),e=!0):e=!1;if(!e)throw Error(u(98,d,a));}}}}
@@ -3796,7 +3796,7 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(1);
-var _assign = __webpack_require__(2);
+var _assign = __webpack_require__(3);
 var Scheduler = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(4);
 var tracing = __webpack_require__(16);
@@ -29199,6 +29199,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -29211,11 +29213,15 @@ var _Shop = __webpack_require__(21);
 
 var _Shop2 = _interopRequireDefault(_Shop);
 
-var _AddProduct = __webpack_require__(28);
+var _Information = __webpack_require__(28);
+
+var _Information2 = _interopRequireDefault(_Information);
+
+var _AddProduct = __webpack_require__(29);
 
 var _AddProduct2 = _interopRequireDefault(_AddProduct);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -29245,12 +29251,15 @@ var App = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             products: _this.props.productsArr,
-            activeId: null
+            activeId: null,
+            isEditMode: false
         }, _this.addProductElement = function (newProduct) {
             var a = [].concat(_toConsumableArray(_this.state.products), [_extends({}, newProduct)]);
             return _this.setState({ products: a });
+        }, _this.setEditMode = function (isEdit) {
+            _this.setState({ isEditMode: isEdit });
         }, _this.setActiveId = function (id) {
-            return _this.setState({ activeId: id });
+            return !_this.state.isEditMode && _this.setState({ activeId: id });
         }, _this.deleteProduct = function (deleteId) {
             var newArrayProducts = _this.state.products.filter(function (el) {
                 return el.id !== deleteId;
@@ -29265,17 +29274,32 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var _state$products$filte = this.state.products.filter(function (el) {
+                return el.id === _this2.state.activeId;
+            }),
+                _state$products$filte2 = _slicedToArray(_state$products$filte, 1),
+                activeProduct = _state$products$filte2[0];
 
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Shop2.default, { shopName: this.props.shopName,
+                _react2.default.createElement(_Shop2.default, {
+                    shopName: this.props.shopName,
                     products: this.state.products,
                     activeId: this.state.activeId,
                     setActiveId: this.setActiveId,
-                    deleteProduct: this.deleteProduct
+                    deleteProduct: this.deleteProduct,
+                    isEditMode: this.state.isEditMode
                 }),
-                _react2.default.createElement(_AddProduct2.default, { addProductElement: this.addProductElement })
+                _react2.default.createElement(_AddProduct2.default, {
+                    addProductElement: this.addProductElement,
+                    setEditMode: this.setEditMode
+                }),
+                this.state.products.some(function (e) {
+                    return e.id === _this2.state.activeId;
+                }) && _react2.default.createElement(_Information2.default, { product: activeProduct })
             );
         }
     }]);
@@ -29318,7 +29342,7 @@ var _Product = __webpack_require__(23);
 
 var _Product2 = _interopRequireDefault(_Product);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -29394,7 +29418,6 @@ Shop.propTypes = {
   activeId: _propTypes2.default.number,
   deleteProduct: _propTypes2.default.func,
   setActiveId: _propTypes2.default.func,
-
   products: _propTypes2.default.arrayOf(_propTypes2.default.shape({
     id: _propTypes2.default.number,
     name: _propTypes2.default.string,
@@ -29428,7 +29451,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -29496,6 +29519,11 @@ var Product = function (_React$Component) {
             'button',
             { onClick: this.deleteElement },
             '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
+          ),
+          _react2.default.createElement(
+            'button',
+            null,
+            '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C'
           )
         )
       );
@@ -29745,7 +29773,7 @@ exports.typeOf = typeOf;
 
 
 var ReactIs = __webpack_require__(7);
-var assign = __webpack_require__(2);
+var assign = __webpack_require__(3);
 
 var ReactPropTypesSecret = __webpack_require__(5);
 var checkPropTypes = __webpack_require__(4);
@@ -30411,6 +30439,84 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Information = function (_React$Component) {
+    _inherits(Information, _React$Component);
+
+    function Information() {
+        _classCallCheck(this, Information);
+
+        return _possibleConstructorReturn(this, (Information.__proto__ || Object.getPrototypeOf(Information)).apply(this, arguments));
+    }
+
+    _createClass(Information, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('img', { src: this.props.product.url, style: { width: 200 }, alt: '' }),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435: ' + this.props.product.name
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    '\u0426\u0435\u043D\u0430: ' + this.props.product.price + ' \u0440\u0443\u0431'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    '\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E: ' + this.props.product.count + ' \u0448\u0442'
+                )
+            );
+        }
+    }]);
+
+    return Information;
+}(_react2.default.Component);
+
+Information.propTypes = {
+    product: _propTypes2.default.shape({
+        id: _propTypes2.default.number,
+        name: _propTypes2.default.string,
+        price: _propTypes2.default.number,
+        count: _propTypes2.default.number,
+        url: _propTypes2.default.string
+    })
+};
+exports.default = Information;
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -30419,11 +30525,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Form = __webpack_require__(29);
+var _Form = __webpack_require__(30);
 
 var _Form2 = _interopRequireDefault(_Form);
 
@@ -30434,6 +30540,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var defaultProduct = {
+    id: 0,
+    name: '',
+    price: 0,
+    count: 0,
+    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpSv_fiqETCIwey5l0mIm24tWVxh7z_6eNw&usqp=CAU"
+};
 
 var AddProduct = function (_React$Component) {
     _inherits(AddProduct, _React$Component);
@@ -30451,14 +30565,7 @@ var AddProduct = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AddProduct.__proto__ || Object.getPrototypeOf(AddProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             isShow: false,
-            product: {
-                id: null,
-                name: null,
-                price: null,
-                count: null,
-                url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpSv_fiqETCIwey5l0mIm24tWVxh7z_6eNw&usqp=CAU"
-            }
-
+            product: defaultProduct
         }, _this.switch = function () {
             _this.setState({ isShow: !_this.state.isShow });
             !_this.state.isShow && _this.setState({ product: _extends({}, _this.state.product, { id: Date.parse(new Date()) }) });
@@ -30467,13 +30574,7 @@ var AddProduct = function (_React$Component) {
             _this.switch();
         }, _this.cancalBtn = function () {
             _this.setState({
-                product: {
-                    id: null,
-                    name: null,
-                    price: null,
-                    count: null,
-                    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpSv_fiqETCIwey5l0mIm24tWVxh7z_6eNw&usqp=CAU"
-                }
+                product: defaultProduct
             });
             _this.switch();
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -30485,7 +30586,12 @@ var AddProduct = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                !this.state.isShow ? _react2.default.createElement('input', { type: 'button', onClick: this.switch, value: '\u0421\u043E\u0437\u0434\u0430\u0442\u044C' }) : _react2.default.createElement(_Form2.default, { product: this.state.product, onSave: this.addBtn, onCancel: this.cancalBtn })
+                !this.state.isShow ? _react2.default.createElement('input', { type: 'button', onClick: this.switch, value: '\u0421\u043E\u0437\u0434\u0430\u0442\u044C' }) : _react2.default.createElement(_Form2.default, {
+                    product: this.state.product,
+                    onSave: this.addBtn,
+                    onCancel: this.cancalBtn,
+                    setEditMode: this.props.setEditMode
+                })
             );
         }
     }]);
@@ -30494,12 +30600,13 @@ var AddProduct = function (_React$Component) {
 }(_react2.default.Component);
 
 AddProduct.propTypes = {
-    addProductElement: _propTypes2.default.func
+    addProductElement: _propTypes2.default.func,
+    setEditMode: _propTypes2.default.func
 };
 exports.default = AddProduct;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30515,7 +30622,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -30543,28 +30650,29 @@ var Form = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Form.__proto__ || Object.getPrototypeOf(Form)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             id: _this.props.product.id || null,
-            name: _this.props.product.name || null,
-            price: _this.props.product.price || null,
-            count: _this.props.product.count || null,
+            name: _this.props.product.name || '',
+            price: _this.props.product.price || 0,
+            count: _this.props.product.count || 0,
             url: _this.props.product.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpSv_fiqETCIwey5l0mIm24tWVxh7z_6eNw&usqp=CAU"
-        }, _this.switch = function () {
-            _this.setState({ isShow: !_this.state.isShow });
-            !_this.state.isShow && _this.setState({ id: Date.parse(new Date()) });
+        }, _this.onChangeInutInfo = function (name, price, count) {
+            name !== _this.props.product.name || price !== _this.props.product.price || count !== _this.props.product.count ? _this.props.setEditMode(true) : _this.props.setEditMode(false);
+            console.log(_this.state);
         }, _this.onChangeName = function (EO) {
+            _this.onChangeInutInfo(EO.target.value, _this.state.price, _this.state.count);
             _this.setState({ name: EO.target.value });
         }, _this.onChangePrice = function (EO) {
+            _this.onChangeInutInfo(_this.state.name, +EO.target.value, _this.state.count);
             _this.setState({ price: +EO.target.value });
         }, _this.onChangeCount = function (EO) {
+            _this.onChangeInutInfo(_this.state.name, _this.state.price, +EO.target.value);
             _this.setState({ count: +EO.target.value });
-        }, _this.saveBtn = function () {
-            if (!_this.state.name | !_this.state.price | !_this.state.count) {
-                console.log('ERROR');
-            } else {
-                console.log(_this.state);
-                _this.props.onSave(_this.state);
-            }
-        }, _this.cancelBtn = function () {
+        }, _this.onSave = function () {
+            var isSave = window.confirm("Вы действительно хотите сохранить?");
+            isSave && _this.props.onSave(_this.state);
+            _this.props.setEditMode(false);
+        }, _this.onCancel = function () {
             _this.props.onCancel();
+            _this.props.setEditMode(false);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -30633,8 +30741,9 @@ var Form = function (_React$Component) {
                         '\u0437\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E'
                     )
                 ),
-                _react2.default.createElement('input', { type: 'button', onClick: this.saveBtn, value: '\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C' }),
-                _react2.default.createElement('input', { type: 'button', onClick: this.cancelBtn, value: '\u043E\u0442\u043C\u0435\u043D\u0430' })
+                _react2.default.createElement('input', { type: 'button', onClick: this.onSave, value: '\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C',
+                    disabled: !this.state.name | !this.state.price | !this.state.count }),
+                _react2.default.createElement('input', { type: 'button', onClick: this.onCancel, value: '\u043E\u0442\u043C\u0435\u043D\u0430' })
             );
         }
     }]);
@@ -30656,7 +30765,7 @@ Form.propTypes = {
 exports.default = Form;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = [{"id":0,"name":"Ананас","price":4.55,"url":"https://img.e-dostavka.by/UserFiles/images/catalog/Goods/1602/00001602/norm/thumbs/00001602.n_1_190x190@2x.png.jpg","count":111},{"id":1,"name":"Банан","price":3.79,"url":"https://img.e-dostavka.by/UserFiles/images/catalog/Goods/3033/00093033/norm/thumbs/00093033.n_1_190x190@2x.png.jpg","count":333},{"id":2,"name":"Помело","price":3.19,"url":"https://img.e-dostavka.by/UserFiles/images/catalog/Goods/7050/00077050/norm/thumbs/00077050.n_1_190x190@2x.png.jpg?09022021","count":444},{"id":3,"name":"Капуста","price":1.71,"url":"https://img.e-dostavka.by/UserFiles/images/catalog/Goods/0923/00010923/norm/thumbs/00010923.n_1_190x190@2x.png.jpg?17022021","count":222},{"id":4,"name":"Томат","price":3.89,"url":"https://img.e-dostavka.by/UserFiles/images/catalog/Goods/5479/00095479/norm/thumbs/00095479.n_1_190x190@2x.png.jpg?17022021","count":555}]

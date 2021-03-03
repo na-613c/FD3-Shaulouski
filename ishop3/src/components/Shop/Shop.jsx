@@ -11,7 +11,6 @@ class Shop extends React.Component {
     activeId: PropTypes.number,
     deleteProduct: PropTypes.func,
     setActiveId: PropTypes.func,
-
     products: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,

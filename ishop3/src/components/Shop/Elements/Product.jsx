@@ -45,7 +45,10 @@ class Product extends React.Component {
         <td>
           <button onClick={this.deleteElement}>
             Удалить
-        </button>
+          </button>
+          <button >
+            Редактировать
+          </button>
         </td>
       </tr>
     );
