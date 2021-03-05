@@ -9,8 +9,10 @@ class Shop extends React.Component {
   static propTypes = {
     shopName: PropTypes.string,
     activeId: PropTypes.number,
+    isEditMode: PropTypes.bool,
     deleteProduct: PropTypes.func,
     setActiveId: PropTypes.func,
+    startEdit: PropTypes.func,
     products: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
@@ -20,17 +22,18 @@ class Shop extends React.Component {
     })),
   };
 
-
-
   render() {
-
     const productsElement = this.props.products.map((product) => {
       return (
-        <Product product={product}
+        <Product
+          product={product}
           deleteProduct={this.props.deleteProduct}
+          startEdit={this.props.startEdit}
           isActive={(product.id === this.props.activeId)}
           setActive={this.props.setActiveId}
-          key={product.id} />
+          isEditMode={this.props.isEditMode}
+          key={product.id}
+        />
       )
     });
 
@@ -39,7 +42,7 @@ class Shop extends React.Component {
     });
 
     return (
-      <table className='ShopTable'>
+      <table className='shopTable'>
         <caption className='ShopCaption'>{this.props.shopName}</caption>
         <thead className='ShopName'>
           <tr>

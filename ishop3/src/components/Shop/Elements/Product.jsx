@@ -15,12 +15,19 @@ class Product extends React.Component {
     deleteProduct: PropTypes.func,
     isActive: PropTypes.bool,
     setActive: PropTypes.func,
+    startEdit: PropTypes.func,
+    isEditMode: PropTypes.bool,
   };
 
   deleteElement = (e) => {
     e.stopPropagation();
     const isDelete = window.confirm("Вы действительно хотите удалить?");
     isDelete && this.props.deleteProduct(this.props.product.id)
+  }
+
+  editProduct = (e) => {
+    e.stopPropagation();
+    this.props.startEdit(this.props.product);
   }
 
   setActiveMod = () => {
@@ -43,10 +50,10 @@ class Product extends React.Component {
           {`${this.props.product.count} шт`}
         </td>
         <td>
-          <button onClick={this.deleteElement}>
+          <button onClick={this.deleteElement} disabled={this.props.isEditMode}>
             Удалить
           </button>
-          <button >
+          <button onClick={this.editProduct} disabled={this.props.isEditMode}>
             Редактировать
           </button>
         </td>

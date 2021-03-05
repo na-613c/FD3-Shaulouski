@@ -1,21 +1,15 @@
-body {
-    background-color: rgb(201, 201, 201);
-}
-
-.ShopTable {
+.shopTable {
     background-color: white;
     border-spacing: 0 10px;
-    padding: 10px;
-    margin: auto;
     border-collapse: collapse
 }
 
-.ShopTable .ShopCaption {
+.shopTable .ShopCaption {
     margin-bottom: 10px;
     font-size: 2em;
 }
 
-.ShopTable .Product .productsImg img {
+.shopTable .Product .productsImg img {
     height: 100px;
 }
 
@@ -27,19 +21,19 @@ body {
     cursor: pointer;
 }
 
-.ShopTable td {
+.shopTable td {
     padding: 0 50px;
     color: #669;
 }
 
-.ShopTable tr {
+.shopTable tr {
     font-weight: normal;
     color: #039;
     border-bottom: 2px solid #6678b1;
     padding: 10px 8px;
 }
 
-.ShopTable tr:hover td {
+.shopTable tr:hover td {
     color: #6699ff;
 }
 

@@ -3,55 +3,42 @@ import PropTypes from 'prop-types';
 import Form from '../Form/Form.jsx';
 
 
-const defaultProduct = {
-    id: 0,
-    name: '',
-    price: 0,
-    count: 0,
-    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnpSv_fiqETCIwey5l0mIm24tWVxh7z_6eNw&usqp=CAU"
-}
-
 class Redaction extends React.Component {
 
     static propTypes = {
-        addProductElement: PropTypes.func,
         setEditMode: PropTypes.func,
+        isShowReduction: PropTypes.bool,
+        placeholder: PropTypes.string,
+        saveProduct: PropTypes.func,
+        cancelEdit: PropTypes.func,
+        editProductCB: PropTypes.func,
+        startEdit: PropTypes.func,
+        editProduct: PropTypes.shape({
+            id: PropTypes.number,
+            name: PropTypes.string,
+            price: PropTypes.number,
+            url: PropTypes.string,
+            count: PropTypes.number
+        })
     };
 
-    state = {
-        isShow: false,
-        product: defaultProduct,
-    }
-
-    switch = () => {
-        this.setState({ isShow: !this.state.isShow })
-        !this.state.isShow &&
-            this.setState({ product: { ...this.state.product, id: Date.parse(new Date) } });
-    }
-
-    addBtn = (product) => {
-        this.props.addProductElement(product)
-        this.switch();
-    }
-
-    cancalBtn = () => {
-        this.setState({
-            product: defaultProduct,
-        });
-        this.switch();
+    createBtn = () => {
+        this.props.startEdit()
     }
 
     render() {
         return (
-            <div>
-                {!this.state.isShow
-                    ? <input type="button" onClick={this.switch} value="Создать" />
-                    : (<Form
-                        product={this.state.product}
-                        onSave={this.addBtn}
-                        onCancel={this.cancalBtn}
+            <div className="createElement">
+                {!this.props.isShowReduction
+                    ? <input type="button" onClick={this.createBtn} value="Создать" />
+                    : <Form
+                        placeholder={this.props.placeholder}
+                        onSave={this.props.saveProduct}
+                        onCancel={this.props.cancelEdit}
                         setEditMode={this.props.setEditMode}
-                    />)
+                        editProductCB={this.props.editProductCB}
+                        product={this.props.editProduct}
+                    />
                 }
             </div>
         );

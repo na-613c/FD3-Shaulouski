@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Information.css';
 
 
 class Information extends React.Component {
@@ -16,8 +17,9 @@ class Information extends React.Component {
 
     render() {
         return (
-            <div>
-                <img src={this.props.product.url} style={{ width: 200 }} alt="" />
+            <div className='information'>
+                <p>Информация</p>
+                <img src={this.props.product.url} alt="" />
                 <div>
                     {`Название: ${this.props.product.name}`}
                 </div>
