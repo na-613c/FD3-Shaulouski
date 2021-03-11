@@ -86,11 +86,13 @@ class App extends React.Component {
     saveProduct = () => {
         const products = this.state.products;
         const editProduct = this.state.editProduct;
-        const newArrayProducts = products.filter((el) => el.id !== editProduct.id);
+        let newArrayProducts = products.map((el) => el.id !== editProduct.id ? el : editProduct);
+        const isOldProduct = newArrayProducts.some((el) => el.id === editProduct.id);
+        !isOldProduct && newArrayProducts.push(editProduct)
 
         this.setShowReduction(false);
         this.setState({
-            products: [...newArrayProducts, editProduct],
+            products: newArrayProducts,
             editProduct: defaultProduct
         })
     }
