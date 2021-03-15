@@ -11,7 +11,13 @@ class BR2JSX extends React.Component {
         const regexp = /<br\s?\/?>/;
         const textArray = this.props.text.split(regexp);
 
-        const text = textArray.map((el) => <React.Fragment key={el}>{el} <br /> </React.Fragment>)
+        const text = textArray.map((el, id) => {
+            return (
+                <React.Fragment key={el}>
+                    {id !== 0 && <br />} {el}
+                </React.Fragment>
+            )
+        })
 
         return (
             <div className='br2jsx'>

@@ -30800,14 +30800,13 @@ var BR2JSX = function (_React$Component) {
             var regexp = /<br\s?\/?>/;
             var textArray = this.props.text.split(regexp);
 
-            var text = textArray.map(function (el) {
+            var text = textArray.map(function (el, id) {
                 return _react2.default.createElement(
                     _react2.default.Fragment,
                     { key: el },
-                    el,
+                    id !== 0 && _react2.default.createElement('br', null),
                     ' ',
-                    _react2.default.createElement('br', null),
-                    ' '
+                    el
                 );
             });
 

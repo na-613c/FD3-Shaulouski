@@ -7,3 +7,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.br2jsx {
+  margin-left: 20px;
+  padding: 20px;
+  width: 150px;
+
+  background-color: black;
+  color: blanchedalmond;
+
+  text-align: center;
+}
