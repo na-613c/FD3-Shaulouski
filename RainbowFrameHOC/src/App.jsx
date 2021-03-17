@@ -1,22 +1,29 @@
 import React from 'react';
-import {withRainbowFrame} from './hoc/withRainbowFrame.jsx'
+import { withRainbowFrame } from './hoc/withRainbowFrame.jsx'
+import DoubleButton from './DoubleButton.jsx'
 
-
-const Fragment = ({ children }) => {
-    return <h1>{children}</h1>
+const style = {
+    width: 700,
+    margin: 'auto',
+    textAlign: 'center',
 }
 
 class App extends React.Component {
 
     render() {
         let colors = ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'];
-        
-        let FramedFragment = withRainbowFrame(colors)(Fragment);
+
+        let FramedDoubleButton = withRainbowFrame(colors)(DoubleButton);
 
         return (
-            <FramedFragment>
-                Hello!
-            </FramedFragment>
+            <div style={style}>
+                <DoubleButton caption1="однажды" caption2="пору" cbPressed={num => alert(num)} >в студёную зимнюю</DoubleButton>
+                <br />
+                <FramedDoubleButton caption1="я из лесу" caption2="мороз" cbPressed={num => alert(num)}>
+                    вышел, был сильный
+                </FramedDoubleButton>
+            </div>
+
         );
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export const withRainbowFrame = (colors) => (Fragment) => ({ children }) => {
+export const withRainbowFrame = (colors) => (Fragment) => ({ children, ...props }) => {
 
     const reduceCB = (acc, cur) => {
         return (
@@ -11,10 +11,10 @@ export const withRainbowFrame = (colors) => (Fragment) => ({ children }) => {
         )
     }
 
-    const rainbowFrame = colors.reduce(reduceCB, <Fragment>{children}</Fragment>);
+    const rainbowFrame = colors.reduce(reduceCB, <Fragment {...props}>{children}</Fragment>);
 
     return (
-        <div style={{ width: 400, textAlign: 'center', margin: 'auto' }}>
+        <div style={{ width: 600, textAlign: 'center', margin: 'auto' }}>
             {rainbowFrame}
         </div>
     );
