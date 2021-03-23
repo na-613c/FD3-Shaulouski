@@ -13,7 +13,7 @@ class BR2JSX extends React.Component {
 
         const text = textArray.map((el, id) => {
             return (
-                <React.Fragment key={el}>
+                <React.Fragment key={id}>
                     {id !== 0 && <br />} {el}
                 </React.Fragment>
             )

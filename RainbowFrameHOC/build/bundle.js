@@ -30774,8 +30774,7 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var withRainbowFrame = function withRainbowFrame(colors) {
     return function (Fragment) {
         return function (_ref) {
-            var children = _ref.children,
-                props = _objectWithoutProperties(_ref, ["children"]);
+            var props = _objectWithoutProperties(_ref, []);
 
             var reduceCB = function reduceCB(acc, cur) {
                 return _react2.default.createElement(
@@ -30785,11 +30784,7 @@ var withRainbowFrame = function withRainbowFrame(colors) {
                 );
             };
 
-            var rainbowFrame = colors.reduce(reduceCB, _react2.default.createElement(
-                Fragment,
-                props,
-                children
-            ));
+            var rainbowFrame = colors.reduce(reduceCB, _react2.default.createElement(Fragment, props));
 
             return _react2.default.createElement(
                 "div",

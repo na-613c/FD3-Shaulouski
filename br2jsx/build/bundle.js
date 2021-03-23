@@ -30803,7 +30803,7 @@ var BR2JSX = function (_React$Component) {
             var text = textArray.map(function (el, id) {
                 return _react2.default.createElement(
                     _react2.default.Fragment,
-                    { key: el },
+                    { key: id },
                     id !== 0 && _react2.default.createElement('br', null),
                     ' ',
                     el
