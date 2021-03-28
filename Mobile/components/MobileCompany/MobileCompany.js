@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { mobileEvents } from '../../events';
 
 
-import MobileClient from './MobileClient/MobileClient';
+import MobileClient from '../MobileClient/MobileClient';
 import MobileForm from '../MobileForm/MobileForm';
+import MobileFilter from '../MobileFilter/MobileFilter';
 
 
-import './MobileCompany.css';
+import('./MobileCompany.css');
 
 
 const defaultClient = {
@@ -67,6 +68,10 @@ class MobileCompany extends React.PureComponent {
     mobileEvents.addListener('ESaveClient', this.save);
     mobileEvents.addListener('ECancel', this.cancel);
 
+    mobileEvents.addListener('EFilterAll', this.filterAll);
+    mobileEvents.addListener('EFilterActive', this.filterActive);
+    mobileEvents.addListener('EFilterBlocked', this.filterBlocked);
+
   };
 
   componentWillUnmount = () => {
@@ -75,6 +80,10 @@ class MobileCompany extends React.PureComponent {
     mobileEvents.removeListener('ECreate', this.create);
     mobileEvents.removeListener('ESaveClient', this.save);
     mobileEvents.removeListener('ECancel', this.cancel);
+
+    mobileEvents.removeListener('EFilterAll', this.filterAll);
+    mobileEvents.removeListener('EFilterActive', this.filterActive);
+    mobileEvents.removeListener('EFilterBlocked', this.filterBlocked);
   };
 
   edit = (client) => {
@@ -118,6 +127,10 @@ class MobileCompany extends React.PureComponent {
     }
   }
 
+  filterAll = () => this.setState({ status: 0 })
+  filterActive = () => this.setState({ status: 1 })
+  filterBlocked = () => this.setState({ status: 2 })
+
   render() {
 
     console.log("MobileCompany render");
@@ -136,14 +149,10 @@ class MobileCompany extends React.PureComponent {
 
     return (
       <div>
-        <input type="button" value="МТС" onClick={this.setName1} />
-        <input type="button" value="A1" onClick={this.setName2} />
+        {/* <input type="button" value="МТС" onClick={this.setName1} />
+        <input type="button" value="A1" onClick={this.setName2} /> */}
         <div className='MobileCompanyName'>Компания &laquo;{this.state.name}&raquo;</div>
-        <div className='Filter'>
-          <button onClick={() => this.setState({ status: 0 })}>Все</button>
-          <button onClick={() => this.setState({ status: 1 })}>Активные</button>
-          <button onClick={() => this.setState({ status: 2 })}>Заблокированные</button>
-        </div>
+        <MobileFilter />
         <table className='MobileCompanyClients'>
           <thead>
             <tr>

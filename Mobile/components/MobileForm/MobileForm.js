@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { mobileEvents } from '../../events';
 
 
-import './MobileForm.css';
+import('./MobileForm.css');
 
 
 
@@ -36,11 +36,11 @@ class MobileForm extends React.PureComponent {
         const elem = {
             id: this.props.client.id,
             FIO: {
-                fam: this.famEl.current.value,
-                im: this.imEl.current.value,
-                otch: this.otchEl.current.value,
+                fam: this.famEl.current ? this.famEl.current.value : this.props.client.FIO.fam,
+                im: this.imEl.current ? this.imEl.current.value : this.props.client.FIO.im,
+                otch: this.otchEl.current ? this.otchEl.current.value : this.props.client.FIO.otch,
             },
-            balance: +this.balanceEl.current.value,
+            balance: +this.balanceEl.current ? +this.balanceEl.current.value : this.props.client.balance,
         }
 
         mobileEvents.emit('ESaveClient', elem);
@@ -78,13 +78,13 @@ class MobileForm extends React.PureComponent {
                         <span>Баланс</span>
                         <input ref={this.balanceEl} type="number" defaultValue={this.props.client.balance} />
                     </div>
-                    <button onClick={this.save}>Сохранить</button>
-                    <button onClick={this.cancel}>Отмена</button>
+                    <button className='MobileForm-Save' onClick={this.save}>Сохранить</button>
+                    <button className='MobileForm-Cancel' onClick={this.cancel}>Отмена</button>
                 </div>
             )
         } else {
             return (
-                <button onClick={this.create}>
+                <button className='MobileForm-Create' onClick={this.create}>
                     Создать
                 </button>
             )
