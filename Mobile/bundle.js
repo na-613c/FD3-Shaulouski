@@ -1,6 +1,36 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	var parentJsonpFunction = window["webpackJsonp"];
+/******/ 	window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// objects to store loaded and loading chunks
+/******/ 	var installedChunks = {
+/******/ 		3: 0
+/******/ 	};
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +56,55 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData === 0) {
+/******/ 			return new Promise(function(resolve) { resolve(); });
+/******/ 		}
+/******/
+/******/ 		// a Promise means "currently loading".
+/******/ 		if(installedChunkData) {
+/******/ 			return installedChunkData[2];
+/******/ 		}
+/******/
+/******/ 		// setup Promise in chunk cache
+/******/ 		var promise = new Promise(function(resolve, reject) {
+/******/ 			installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 		});
+/******/ 		installedChunkData[2] = promise;
+/******/
+/******/ 		// start chunk loading
+/******/ 		var head = document.getElementsByTagName('head')[0];
+/******/ 		var script = document.createElement('script');
+/******/ 		script.type = "text/javascript";
+/******/ 		script.charset = 'utf-8';
+/******/ 		script.async = true;
+/******/ 		script.timeout = 120000;
+/******/
+/******/ 		if (__webpack_require__.nc) {
+/******/ 			script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 		}
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + ".bundle.js";
+/******/ 		var timeout = setTimeout(onScriptComplete, 120000);
+/******/ 		script.onerror = script.onload = onScriptComplete;
+/******/ 		function onScriptComplete() {
+/******/ 			// avoid mem leaks in IE.
+/******/ 			script.onerror = script.onload = null;
+/******/ 			clearTimeout(timeout);
+/******/ 			var chunk = installedChunks[chunkId];
+/******/ 			if(chunk !== 0) {
+/******/ 				if(chunk) {
+/******/ 					chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
+/******/ 				}
+/******/ 				installedChunks[chunkId] = undefined;
+/******/ 			}
+/******/ 		};
+/******/ 		head.appendChild(script);
+/******/
+/******/ 		return promise;
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -58,6 +137,9 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 8);
@@ -396,25 +478,6 @@ if (process.env.NODE_ENV !== 'production') {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -431,6 +494,25 @@ var mobileEvents = new _events.EventEmitter();
 // лучше работать не с текстовыми литералами, а объявить переменные с соответствующими значениями
 
 exports.mobileEvents = mobileEvents;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
 
 /***/ }),
 /* 6 */
@@ -29372,17 +29454,19 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _events = __webpack_require__(5);
+var _events = __webpack_require__(4);
 
 var _MobileClient = __webpack_require__(30);
 
 var _MobileClient2 = _interopRequireDefault(_MobileClient);
 
-var _MobileForm = __webpack_require__(32);
+var _MobileForm = __webpack_require__(31);
 
 var _MobileForm2 = _interopRequireDefault(_MobileForm);
 
-__webpack_require__(34);
+var _MobileFilter = __webpack_require__(32);
+
+var _MobileFilter2 = _interopRequireDefault(_MobileFilter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29393,6 +29477,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+__webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 35));
 
 var defaultClient = {
   id: 1,
@@ -29440,12 +29526,20 @@ var MobileCompany = function (_React$PureComponent) {
       _events.mobileEvents.addListener('ECreate', _this.create);
       _events.mobileEvents.addListener('ESaveClient', _this.save);
       _events.mobileEvents.addListener('ECancel', _this.cancel);
+
+      _events.mobileEvents.addListener('EFilterAll', _this.filterAll);
+      _events.mobileEvents.addListener('EFilterActive', _this.filterActive);
+      _events.mobileEvents.addListener('EFilterBlocked', _this.filterBlocked);
     }, _this.componentWillUnmount = function () {
       _events.mobileEvents.removeListener('EDelete', _this.delete);
       _events.mobileEvents.removeListener('EEdit', _this.edit);
       _events.mobileEvents.removeListener('ECreate', _this.create);
       _events.mobileEvents.removeListener('ESaveClient', _this.save);
       _events.mobileEvents.removeListener('ECancel', _this.cancel);
+
+      _events.mobileEvents.removeListener('EFilterAll', _this.filterAll);
+      _events.mobileEvents.removeListener('EFilterActive', _this.filterActive);
+      _events.mobileEvents.removeListener('EFilterBlocked', _this.filterBlocked);
     }, _this.edit = function (client) {
       _this.setState({
         editClient: client,
@@ -29481,6 +29575,12 @@ var MobileCompany = function (_React$PureComponent) {
         });
         _this.setState({ clients: [].concat(_toConsumableArray(newClientsArr)) });
       }
+    }, _this.filterAll = function () {
+      return _this.setState({ status: 0 });
+    }, _this.filterActive = function () {
+      return _this.setState({ status: 1 });
+    }, _this.filterBlocked = function () {
+      return _this.setState({ status: 2 });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -29509,8 +29609,6 @@ var MobileCompany = function (_React$PureComponent) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement('input', { type: 'button', value: '\u041C\u0422\u0421', onClick: this.setName1 }),
-        _react2.default.createElement('input', { type: 'button', value: 'A1', onClick: this.setName2 }),
         _react2.default.createElement(
           'div',
           { className: 'MobileCompanyName' },
@@ -29518,31 +29616,7 @@ var MobileCompany = function (_React$PureComponent) {
           this.state.name,
           '\xBB'
         ),
-        _react2.default.createElement(
-          'div',
-          { className: 'Filter' },
-          _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                return _this2.setState({ status: 0 });
-              } },
-            '\u0412\u0441\u0435'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                return _this2.setState({ status: 1 });
-              } },
-            '\u0410\u043A\u0442\u0438\u0432\u043D\u044B\u0435'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                return _this2.setState({ status: 2 });
-              } },
-            '\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0435'
-          )
-        ),
+        _react2.default.createElement(_MobileFilter2.default, null),
         _react2.default.createElement(
           'table',
           { className: 'MobileCompanyClients' },
@@ -29848,7 +29922,7 @@ exports.typeOf = typeOf;
 var ReactIs = __webpack_require__(7);
 var assign = __webpack_require__(2);
 
-var ReactPropTypesSecret = __webpack_require__(4);
+var ReactPropTypesSecret = __webpack_require__(5);
 var checkPropTypes = __webpack_require__(27);
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
@@ -30447,7 +30521,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(4);
+  var ReactPropTypesSecret = __webpack_require__(5);
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -30554,7 +30628,7 @@ module.exports = checkPropTypes;
 
 
 
-var ReactPropTypesSecret = __webpack_require__(4);
+var ReactPropTypesSecret = __webpack_require__(5);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -31138,9 +31212,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _events = __webpack_require__(5);
-
-__webpack_require__(31);
+var _events = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31149,6 +31221,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+__webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 33));
 
 var MobileClient = function (_React$PureComponent) {
   _inherits(MobileClient, _React$PureComponent);
@@ -31164,12 +31238,12 @@ var MobileClient = function (_React$PureComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MobileClient.__proto__ || Object.getPrototypeOf(MobileClient)).call.apply(_ref, [this].concat(args))), _this), _this.state = _extends({}, _this.props.client), _this.componentWillReceiveProps = function (newProps) {
-      var isNewProps = _this.state.id !== newProps.client.id || _this.state.balance !== newProps.client.balance || _this.state.FIO.fam !== newProps.client.FIO.fam || _this.state.FIO.im !== newProps.client.FIO.im || _this.state.FIO.otch !== newProps.client.FIO.otch;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MobileClient.__proto__ || Object.getPrototypeOf(MobileClient)).call.apply(_ref, [this].concat(args))), _this), _this.state = _extends({}, _this.props.client), _this.componentDidUpdate = function (prevProps) {
+      var isNewProps = _this.props.client.id !== prevProps.client.id || _this.props.client.balance !== prevProps.client.balance || _this.props.client.FIO.fam !== prevProps.client.FIO.fam || _this.props.client.FIO.im !== prevProps.client.FIO.im || _this.props.client.FIO.otch !== prevProps.client.FIO.otch;
 
       if (isNewProps) {
-        _this.setState(_extends({}, newProps.client, {
-          FIO: _extends({}, newProps.client.FIO)
+        _this.setState(_extends({}, _this.props.client, {
+          FIO: _extends({}, _this.props.client.FIO)
         }));
       }
     }, _this.delete = function (EO) {
@@ -31220,7 +31294,7 @@ var MobileClient = function (_React$PureComponent) {
           null,
           _react2.default.createElement(
             'button',
-            { onClick: this.edit },
+            { className: 'MobileClient-Edit', onClick: this.edit },
             '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C'
           )
         ),
@@ -31229,7 +31303,7 @@ var MobileClient = function (_React$PureComponent) {
           null,
           _react2.default.createElement(
             'button',
-            { onClick: this.delete },
+            { className: 'MobileClient-Delete', onClick: this.delete },
             '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
           )
         )
@@ -31255,12 +31329,6 @@ exports.default = MobileClient;
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31280,9 +31348,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _events = __webpack_require__(5);
-
-__webpack_require__(33);
+var _events = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31291,6 +31357,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+__webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 34));
 
 var MobileForm = function (_React$PureComponent) {
     _inherits(MobileForm, _React$PureComponent);
@@ -31304,11 +31372,11 @@ var MobileForm = function (_React$PureComponent) {
             var elem = {
                 id: _this.props.client.id,
                 FIO: {
-                    fam: _this.famEl.current.value,
-                    im: _this.imEl.current.value,
-                    otch: _this.otchEl.current.value
+                    fam: _this.famEl.current ? _this.famEl.current.value : _this.props.client.FIO.fam,
+                    im: _this.imEl.current ? _this.imEl.current.value : _this.props.client.FIO.im,
+                    otch: _this.otchEl.current ? _this.otchEl.current.value : _this.props.client.FIO.otch
                 },
-                balance: +_this.balanceEl.current.value
+                balance: +_this.balanceEl.current ? +_this.balanceEl.current.value : _this.props.client.balance
             };
 
             _events.mobileEvents.emit('ESaveClient', elem);
@@ -31381,19 +31449,19 @@ var MobileForm = function (_React$PureComponent) {
                     ),
                     _react2.default.createElement(
                         'button',
-                        { onClick: this.save },
+                        { className: 'MobileForm-Save', onClick: this.save },
                         '\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C'
                     ),
                     _react2.default.createElement(
                         'button',
-                        { onClick: this.cancel },
+                        { className: 'MobileForm-Cancel', onClick: this.cancel },
                         '\u041E\u0442\u043C\u0435\u043D\u0430'
                     )
                 );
             } else {
                 return _react2.default.createElement(
                     'button',
-                    { onClick: this.create },
+                    { className: 'MobileForm-Create', onClick: this.create },
                     '\u0421\u043E\u0437\u0434\u0430\u0442\u044C'
                 );
             }
@@ -31418,16 +31486,82 @@ MobileForm.propTypes = {
 exports.default = MobileForm;
 
 /***/ }),
-/* 33 */
-/***/ (function(module, exports) {
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+"use strict";
 
-/***/ }),
-/* 34 */
-/***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _events = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MobileFilter = function (_React$PureComponent) {
+    _inherits(MobileFilter, _React$PureComponent);
+
+    function MobileFilter() {
+        _classCallCheck(this, MobileFilter);
+
+        return _possibleConstructorReturn(this, (MobileFilter.__proto__ || Object.getPrototypeOf(MobileFilter)).apply(this, arguments));
+    }
+
+    _createClass(MobileFilter, [{
+        key: 'render',
+        value: function render() {
+            console.log("MobileFilter render");
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'Filter' },
+                _react2.default.createElement(
+                    'button',
+                    { className: 'FilterAll', onClick: function onClick() {
+                            return _events.mobileEvents.emit('EFilterAll');
+                        } },
+                    '\u0412\u0441\u0435'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'FilterActive', onClick: function onClick() {
+                            return _events.mobileEvents.emit('EFilterActive');
+                        } },
+                    '\u0410\u043A\u0442\u0438\u0432\u043D\u044B\u0435'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'FilterBlocked', onClick: function onClick() {
+                            return _events.mobileEvents.emit('EFilterBlocked');
+                        } },
+                    '\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0435'
+                )
+            );
+        }
+    }]);
+
+    return MobileFilter;
+}(_react2.default.PureComponent);
+
+exports.default = MobileFilter;
 
 /***/ })
 /******/ ]);
