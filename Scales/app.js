@@ -1,4 +1,3 @@
-// tsc -t es5 app.ts
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+// tsc -t es5 app.ts
 var Product = /** @class */ (function () {
     function Product(scale, name) {
         this._scale = 0;
@@ -61,7 +61,7 @@ var Scales = /** @class */ (function () {
         get: function () {
             return this._products
                 .map(function (a) { return a.getName; })
-                .reduce(function (name, str) { return str + " " + name; });
+                .reduce(function (str, name) { return str + " " + name; });
         },
         enumerable: false,
         configurable: true
@@ -70,20 +70,20 @@ var Scales = /** @class */ (function () {
 }());
 var Apple = /** @class */ (function (_super) {
     __extends(Apple, _super);
-    function Apple(scale, name) {
-        return _super.call(this, scale, name) || this;
+    function Apple() {
+        return _super.call(this, 10, 'Apple') || this;
     }
     return Apple;
 }(Product));
 var Tomato = /** @class */ (function (_super) {
     __extends(Tomato, _super);
-    function Tomato(scale, name) {
-        return _super.call(this, scale, name) || this;
+    function Tomato() {
+        return _super.call(this, 2, 'Tomato') || this;
     }
     return Tomato;
 }(Product));
-var apple = new Apple(10, 'Apple');
-var tomato = new Tomato(2, 'Tomato');
+var apple = new Apple();
+var tomato = new Tomato();
 var scales = new Scales();
 scales.add = apple;
 scales.add = tomato;

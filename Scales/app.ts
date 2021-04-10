@@ -33,24 +33,24 @@ class Scales {
     get getNameList(): string {
         return this._products
             .map(a => a.getName)
-            .reduce((name: string, str: string): string => `${str} ${name}`)
+            .reduce((str: string, name: string): string => `${str} ${name}`)
     }
 }
 
 class Apple extends Product {
-    constructor(scale: number, name: string) {
-        super(scale, name);
+    constructor() {
+        super(10, 'Apple');
     }
 }
 
 class Tomato extends Product {
-    constructor(scale: number, name: string) {
-        super(scale, name);
+    constructor() {
+        super(2, 'Tomato');
     }
 }
 
-let apple: Apple = new Apple(10, 'Apple')
-let tomato: Tomato = new Tomato(2, 'Tomato')
+let apple: Apple = new Apple()
+let tomato: Tomato = new Tomato()
 
 let scales: Scales = new Scales();
 
